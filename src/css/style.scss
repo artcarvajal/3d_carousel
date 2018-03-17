@@ -1,0 +1,100 @@
+* {
+  position: relative;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: white;
+  background-color: black;
+  background: linear-gradient(to bottom right, #40D5FF, #FFAC7F, #6371cc);
+  overflow: hidden;
+  font-family: "Ubuntu";
+}
+
+h3 {
+  text-align: center;
+}
+
+#left, #right {
+  cursor: pointer;
+  font-size: 5rem;
+  color: white;
+  background-color: black;
+  opacity: 0.33;
+  text-decoration: none;
+  width: 50px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  position: absolute;
+  top: 0;
+}
+#left {
+  left: 0;
+}
+#right {
+  right: 0;
+}
+
+.description {
+  width: 100%;
+  display: block;
+  position: absolute;
+  text-align: center;
+}
+
+$w: 400px;
+
+.carousel-container {
+  perspective: 6400px;
+  perspective-origin: center center;
+}
+
+.panes-container {
+  height: 100vh;
+  text-align: center;
+  border: none;
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  
+  transform-style: preserve-3d;
+  transform-origin: center center -1 * $w;
+  transform: translate3d(0,0,-400px) perspective(4 * $w) rotateY(0deg);
+  transition: transform 1s;
+  margin: 0 auto;
+}
+
+.panes-container div {
+  overflow: hidden;
+  position: absolute;
+  background: rgba(0,0,0,0.2);
+  padding: 3px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  opacity: 0.25;
+  
+  height: $w;
+  width: $w;
+  
+  img {
+    width: 100%;
+    height: auto;
+  }
+    
+  &:nth-child(1) { transform: translate3d(0,0,-.5 * $w) rotateY(0deg); }
+  &:nth-child(2) { transform: translate3d(-.5 * $w,0,-1 * $w) rotateY(-90deg); }
+  &:nth-child(3) { transform: translate3d(0,0,-1.5 * $w) rotateY(-180deg); }
+  &:nth-child(4) { transform: translate3d(.5 * $w,0,-1 * $w) rotateY(-270deg); }
+}
+
+.panes-container div.highlighted-pane {
+  opacity: 1;
+}
